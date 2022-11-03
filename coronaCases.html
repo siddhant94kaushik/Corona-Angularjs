@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corona-Tracker-App</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <script src =  "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="coronaCases.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="coronaCases.css"/>
+
+</head>
+<body ng-app="app">
+    <div ng-controller="emp">
+
+        <div class="card mt-2 ">
+            <div class="card-body"> 
+                <h1>Corona Tracker App</h1> 
+              <h5 class="text-center card-title">Total Confirmed</h5>
+              <h6 class="card-subtitle mb-2 text-warning text-center">{{data.confirmed.value}}</h6>
+
+              <h5 class="text-center card-title">Total Recovered</h5>
+              <h6 class="card-subtitle mb-2 text-success text-center">{{data.recovered.value}}</h6>
+
+              <h5 class="text-center card-title">Total Deaths</h5>
+              <h6 class="card-subtitle mb-2 text-danger text-center">{{data.deaths.value}}</h6>
+
+              <h5 class="text-center card-title">Last Updated Time</h5>
+              <h6 class="card-subtitle mb-2 text-muted text-center">{{data.lastUpdate | date : "medium"}}</h6>
+              <div class="text-center">
+               <div class="form-group">
+                <!-- <lable>Enter Country Name</lable> -->
+                <input type="text" class="form-control" ng-model="searchCountry" placeholder="Search by country">
+              </div>
+               <button class="btn btn-primary" ng-click="doSearch()">Search</button>
+            </div>     
+          </div>
+
+      <div class="row" ng-if="showCountryData">
+        <div class="col-md-6">
+            <div>Total Confirmed Cases:</div>
+        </div>
+        <div class="col-md-6">
+            <div>{{confirmed.value}}</div>
+        </div>
+
+        <div class="col-md-6">
+            <div>Total Recovered:</div>
+        </div>
+        <div class="col-md-6">
+            <div>{{recovered.value}}</div>
+        </div>
+
+        <div class="col-md-6">
+            <div>Total Deaths</div>
+        </div>
+        <div class="col-md-6">
+            <div>{{deaths.value}}</div>
+        </div>
+
+        <div class="col-md-6">
+            <div>Last Updated On:</div>
+        </div>
+        <div class="col-md-6">
+            <div>{{lastUpdate | date: 'medium'}}</div>
+        </div>
+          
+        </div>
+      </div>
+      
+      
+    </div>
+</body>
+</html>
