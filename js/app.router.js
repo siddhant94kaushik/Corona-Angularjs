@@ -8,9 +8,10 @@ app.config(['$routeProvider',function($routeProvider){
        caseInsensitiveMatch: true
    })
   //  .......................................................
-  //  .when('/second-msg', {
-  //   template: '<strong>U are in Second route page</strong>'
-  //  })
+   .when('/Odata', {
+    templateUrl: 'pages/Odata.html',
+    controller: 'odata', 
+   })
   //  .when('/second-msg', {
     // redirectTo: "/products"
     // redirectTo: function(){
@@ -77,7 +78,8 @@ app.controller("product",['$scope','empService','$log', function($scope, empServ
       }
 
       $scope.deleteProduct = function(){
-        empService.deleteProduct($scope.productId).then(function(response){
+        empService.deleteProduct($scope.productId)
+        .then(function(response){
            $scope.products.splice($scope.products.findIndex(prod => prod.id === response.id) , 1)    
         }).catch(function(err){
 
@@ -88,6 +90,113 @@ app.controller("product",['$scope','empService','$log', function($scope, empServ
         $log.log(empService.getProducts())
         $scope.products = cd;
     });
+
+}]);
+
+
+app.controller("odata",['$scope','empService','$log', function($scope, empService, $log){
+
+  // $scope.url = "https://services.odata.org/V3/(S(qzuttktpdu4t4ahxu22biwzo))/OData/OData.svc/Products?$format=json";
+  $scope.url = "https://services.odata.org/OData/OData.svc/Products?$format=json";
+
+  $scope.products = [];
+  $scope.showGetData= false;
+  $scope.showDeleteId = false;
+  $scope.addNewData = false;
+
+  $scope.Tryit = function(){
+    console.log($scope.selectMethod)
+    $scope.selectMethod;
+    
+
+    if($scope.selectMethod == "GET"){
+      $scope.showGetData= true;
+      empService.getOdata()
+      .then(function (response) {
+        console.log(response);
+        $scope.products = response.value;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
+    else if($scope.selectMethod == "DELETE"){
+      $scope.showDeleteId = true;
+      empService.deleteOdata(id)
+      .then(function (response) {
+        console.log(response);
+        $scope.products = response.value;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
+    else if($scope.selectMethod == "POST"){
+      $scope.product = [];
+      $scope.addNewData = true;
+      $scope.addProducts = function(){
+        console.log({...$scope.addOdata,"odata.type":"ODataDemo.Product"});
+         empService.postOdata($scope.addOdata).then((response)=>{
+            console.log(response);
+         }).catch((error)=>{
+            console.log(error);
+         })
+      }
+      
+      
+
+      // $scope.addCategory = function(){
+      //   console.log({...$scope.cat,"odata.type":"ODataDemo.Category"});
+      //   ApiService.addCategory($scope.cat).then((response)=>{
+      //       console.log(response);
+      //   }).catch((error)=>{
+  
+      //   })
+  
+      // }
+
+    }
+ } 
+
+ $scope.getCount = function(){
+
+  empService.getCount().then((res)=>{
+      console.log(res);
+      $scope.count = res
+  }).catch((err)=>{
+
+  })
+}
+
+ $scope.selectRating = function (rating) {
+  console.log(rating);
+  if (rating == 0) {
+    empService.getODataProducts()
+      .then(function (response) {
+        console.log(response);
+        $scope.products = response.value;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  } else {
+    empService.getFilterRatings(rating)
+      .then(function (response) {
+        console.log(response);
+        $scope.products = response.value;
+      })
+      .catch(function (error) {});
+  }
+};
+
+$scope.orderByPrice = function(){
+  empService.orderByPrice().then((response)=>{
+       $scope.products = response.value
+  }).catch((error)=>{
+
+  })
+}
+
 
 
 }]);

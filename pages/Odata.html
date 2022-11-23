@@ -1,0 +1,107 @@
+<header class=" text-primary border border-light border-2 rounded-1 bg-light p-1 text-center fw-bold fs-5">
+    <p>O Data</p>
+  </header>
+                                          
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Base Url</label>
+    <input type="url" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" ng-model="url" required>
+  </div>
+
+  <div class="mb-3">
+    <h5>Methods</h5>
+    <select class="form-select" aria-label="Default select example" ng-model="selectMethod" >
+        <option value="GET" >GET</option>
+        <option value="POST">POST</option>
+        <option value="PUT">PUT</option>
+        <option value="DELETE">DELETE</option>
+        
+    </select>
+  </div>
+
+  <div class="mb-3" style="margin: 10px;" ng-if="showDeleteId">
+    <input type="text" ng-model="Id" />
+  </div>
+
+  <div class="text-center" >
+    <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addCategory">Add New Category</button>
+  </div>
+
+
+  <button type="submit" class="btn btn-primary ml-3" ng-click="Tryit()">Try it</button>
+
+
+ 
+
+
+
+  
+  <div class="mb-3" ng-if="showGetData">
+    <button type="submit" class="btn btn-primary ml-3" ng-click="orderByPrice()">Order By Price</button>
+    <button type="submit" class="btn btn-primary ml-3" ng-click="getCount()">Count {{count}}</button>
+
+    <label for="exampleFormControlTextarea1" class="form-label">Get Method Result</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" ng-repeat="prod in products">{{prod}}</textarea>
+  </div>
+
+  
+
+  <!-- <div class="mb-3" >
+    <label for="exampleFormControlTextarea1" class="form-label">Post Body</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" ></textarea>
+  </div> -->
+
+
+<!-- Modal for Post -->
+
+  <div class="modal fade" id="addCategory" tabindex="-1" aria-labelledby="addCategoryLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Product</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form name="addProd">
+            <div class="mb-2">
+              <label class="form-label">Id</label>
+              <input type="number" class="form-control" id="id" ng-model="addOdata.ID" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" id="name" ng-model="addOdata.Name" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Description</label>
+              <input type="text" class="form-control" id="description" ng-model="addOdata.Description" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">ReleaseDate</label>
+              <input type="number" class="form-control" id="releasedate" ng-model="addOdata.ReleaseDate" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">DiscontinuedDate</label>
+              <input type="number" class="form-control" id="discontinueddate ng-model="addOdata.DiscontinuedDate" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Rating</label>
+              <input type="number" class="form-control" id="rating" ng-model="addOdata.Rating" required>
+            </div>
+            <div class="mb-2">
+              <label class="form-label">Price</label>
+              <input type="number" class="form-control" id="price" ng-model="addOdata.Price" required>
+            </div>
+            
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary btn-sm"  ng-click="addProducts()" ng-disabled="addProd.$invalid" data-bs-dismiss="modal">Save</button>
+            </div>
+          </form>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  
+
+  
+
