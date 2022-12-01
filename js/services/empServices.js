@@ -1,5 +1,9 @@
+// Initilializing the module for app.
 angular.module("myApp").service('empService',["$http","$log","$q","ApiConfig", function($http, $log,$q,ApiConfig){
     
+// Services created for product api.
+
+// getProducts = for getting the data from api.
     this.getProducts = function(cb){
         $http({
           method: "GET",
@@ -15,7 +19,7 @@ angular.module("myApp").service('empService',["$http","$log","$q","ApiConfig", f
             }
         )
       }
-
+// addProduct = for adding the new product data.
       this.addProduct = function(newProduct){
         var deferred = $q.defer();
         $http({
@@ -31,7 +35,7 @@ angular.module("myApp").service('empService',["$http","$log","$q","ApiConfig", f
           });
         return deferred.promise;
       }
-
+// updateProduct = for updating any existing product.
       this.updateProduct = function(product,id){
         var deferred = $q.defer();
         $http({
@@ -47,7 +51,7 @@ angular.module("myApp").service('empService',["$http","$log","$q","ApiConfig", f
           });
         return deferred.promise;
       }
-
+// deleteProduct = for deleting any prodcut from the list.
       this.deleteProduct = function(id){
         console.log("Service ---- "+ id);
         var deferred = $q.defer();
@@ -63,9 +67,11 @@ angular.module("myApp").service('empService',["$http","$log","$q","ApiConfig", f
           });
         return deferred.promise;
       }
+ 
 
-// ..........................................................................
+// Services created for odata api.
 
+  //  service fo getting the api odata.
       this.getOdata = function(){
         var deferred = $q.defer();
         $http({
@@ -82,7 +88,7 @@ angular.module("myApp").service('empService',["$http","$log","$q","ApiConfig", f
         return deferred.promise;
   
       }
-
+  // service for posting the api odata.
       this.postOdata = function(addOdata){
         var deferred = $q.defer();
         console.log({...addOdata,"odata.type":"ODataDemo.Product"})
@@ -101,7 +107,7 @@ angular.module("myApp").service('empService',["$http","$log","$q","ApiConfig", f
   
       }
 
-// ...............
+  // service for editing the product api odata.
       this.putOdata = function(){
         var deferred = $q.defer();
         $http({
@@ -118,14 +124,14 @@ angular.module("myApp").service('empService',["$http","$log","$q","ApiConfig", f
         return deferred.promise;
   
       }
-
+  // service for deleting the api odata. 
       this.deleteOdata = function(id){
         console.log("Odata ---- "+ id);
         var deferred = $q.defer();
         $http({
           method: "DELETE",
-          url: "https://services.odata.org/V3/(S(qzuttktpdu4t4ahxu22biwzo))/OData/OData.svc/Products("+id+")?$format=json",
-          // url: ApiConfig.deleteOdataUrl(id),
+          // url: "https://services.odata.org/V3/(S(qzuttktpdu4t4ahxu22biwzo))/OData/OData.svc/Products("+id+")?$format=json",
+          url: ApiConfig.deleteOdataUrl(id),
           
         })
           .success(function (data) {
@@ -139,8 +145,9 @@ angular.module("myApp").service('empService',["$http","$log","$q","ApiConfig", f
       }
 
 
-// filters......
+// Filters service api.
 
+// for filter ther data based on rating.
 this.getFilterRatings = function(rating){
     
   var deferred = $q.defer();
@@ -158,7 +165,7 @@ this.getFilterRatings = function(rating){
   return deferred.promise;
 
 }
-
+// for sorting the data on basis of price.
 this.orderByPrice = function(){
   var deferred = $q.defer();
   $http({
@@ -174,7 +181,7 @@ this.orderByPrice = function(){
     });
   return deferred.promise;
 }
-
+// for getting the total number of products.
 this.getCount = function(){
   var deferred = $q.defer();
   $http({

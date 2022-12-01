@@ -9,49 +9,34 @@
 
   <div class="mb-3">
     <h5>Methods</h5>
-    <select class="form-select" aria-label="Default select example" ng-model="selectMethod" >
+    <select class="form-select" aria-label="Default select example" ng-model="selectMethod" ng-change="select()">
         <option value="GET" >GET</option>
         <option value="POST">POST</option>
         <option value="PUT">PUT</option>
-        <option value="DELETE">DELETE</option>
-        
+        <option value="DELETE">DELETE</option>    
     </select>
   </div>
+  <input type="text" ng-model="selectId" placeholder="Provide Id of Product" ng-show="showDeleteId" />
 
-  <div class="mb-3" style="margin: 10px;" ng-if="showDeleteId">
-    <input type="text" ng-model="Id" />
-  </div>
-
-  <div class="text-center" >
+  <div class="text-center" ng-show="addNewData">
     <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addCategory">Add New Category</button>
   </div>
 
 
   <button type="submit" class="btn btn-primary ml-3" ng-click="Tryit()">Try it</button>
-
-
- 
-
-
-
+  
   
   <div class="mb-3" ng-if="showGetData">
-    <button type="submit" class="btn btn-primary ml-3" ng-click="orderByPrice()">Order By Price</button>
+    <button type="submit" class="btn btn-primary ml-3 " ng-click="orderByPrice()" >Order By Price</button>
     <button type="submit" class="btn btn-primary ml-3" ng-click="getCount()">Count {{count}}</button>
 
-    <label for="exampleFormControlTextarea1" class="form-label">Get Method Result</label>
+    <!-- <label for="exampleFormControlTextarea1" class="form-label">Get Method Result</label> -->
     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" ng-repeat="prod in products">{{prod}}</textarea>
   </div>
 
-  
-
-  <!-- <div class="mb-3" >
-    <label for="exampleFormControlTextarea1" class="form-label">Post Body</label>
-    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" ></textarea>
-  </div> -->
 
 
-<!-- Modal for Post -->
+  <!-- Modal for Post -->
 
   <div class="modal fade" id="addCategory" tabindex="-1" aria-labelledby="addCategoryLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -76,11 +61,11 @@
             </div>
             <div class="mb-2">
               <label class="form-label">ReleaseDate</label>
-              <input type="number" class="form-control" id="releasedate" ng-model="addOdata.ReleaseDate" required>
+              <input type="date" class="form-control" id="releasedate" ng-model="addOdata.ReleaseDate" required>
             </div>
             <div class="mb-2">
               <label class="form-label">DiscontinuedDate</label>
-              <input type="number" class="form-control" id="discontinueddate ng-model="addOdata.DiscontinuedDate" required>
+              <input type="date" class="form-control" id="discontinueddate" ng-model="addOdata.DiscontinuedDate" required>
             </div>
             <div class="mb-2">
               <label class="form-label">Rating</label>

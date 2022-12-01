@@ -1,0 +1,15 @@
+    <!-- directive html file -->
+    <div class="card p-3">
+     <img class="card-img-top" src={{prod.image}} alt="Card image cap" width="70%">
+      <div class="card-body">
+        <h5 class="card-title">{{prod.title}}</h5>
+        <span class="card-text">$ {{prod.price}}</span>
+        <p class="card-text">{{prod.description}}</p>
+        <p class="card-text"><small class="text-muted">{{prod.category}}</small></p>
+        <!-- <a href="#" class="btn btn-warning btn-sm" ng-click="addEditModal(prod)" data-bs-toggle="modal" data-bs-target="#editProductModal">Update</a>
+        <a href="#" class="btn btn-danger btn-sm">Delete</a> -->
+          <button  class="btn btn-warning btn-sm" ng-click="addEditModal(prod)" data-bs-toggle="modal" data-bs-target="#editProductModal">Update</button>
+          <button  class="btn btn-danger btn-sm" ng-click="deleteProductModal(prod.id)" data-bs-toggle="modal" data-bs-target="#deleteProductModal">Delete</button>
+        </div>
+       </div>
+      
